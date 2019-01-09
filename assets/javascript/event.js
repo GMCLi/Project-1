@@ -72,8 +72,8 @@ $("#eventSearch").on("click", function(){
 
                         var newEventcardbody = $("<div>");
                         newEventcardbody.addClass("card-body");
-                        newEventcardbody.attr("data-min", EventMinPrice);
-                        newEventcardbody.attr("data-max", eventMaxPrice);
+                        // newEventcardbody.attr("data-min", EventMinPrice);
+                        // newEventcardbody.attr("data-max", eventMaxPrice);
 
                         
                         var neweventTitle = $("<h5>");
@@ -86,6 +86,9 @@ $("#eventSearch").on("click", function(){
 
                         var newEventPrice = $("<p>");
                         newEventPrice.addClass("card-text");
+                        newEventPrice.addClass("price-range")
+                        newEventPrice.attr("data-min", EventMinPrice);
+                        newEventPrice.attr("data-max", eventMaxPrice);
                         newEventPrice.text("Price range: " + EventMinPrice + " to " + eventMaxPrice + " " + eventCurrency);
 
                         var newEventDate

@@ -8,7 +8,23 @@
   <title>First Project!</title>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
   <link rel="stylesheet" href="style.css">
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <link href="assets/jquery-flexdatalist-2.2.4/jquery.flexdatalist.min.css" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+        crossorigin="anonymous">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.7.2/firebase.js"></script>
+
+ 
+    <script src="assets/jquery-flexdatalist-2.2.4/jquery.flexdatalist.min.js"></script>
+
+
+
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
   
 </head>
@@ -26,7 +42,12 @@
         <a class="nav-item nav-link active" href="#">Currency</a>
 
       </div>
-    </div>
+    </div>  
+    <input type="text" class="form-control flexdatalist" data-min-length='1'
+    list='currency'
+    name="currnecy"
+    id="default">
+    <button type="button" id="change_default" class="btn btn-primary">Primary</button>
   </nav>
   <div class="jumbotron jumbotron-fluid">
     <div class="container">
@@ -44,20 +65,30 @@
             <div class="form-row">
               <div class="col-4">
                 <label for="amount" class="convertorform-label">Amount</label>
-                <input type="text" class="form-control">
+                <input type="text" id="amount" class="form-control ">
               </div>
               <div class="col-4">
                 <label for="from" class="convertorform-label">From</label>
-                <input type="text" class="form-control">
+                <input type="text" class="form-control flexdatalist" data-min-length='1'
+                list='currency'
+                name="currnecy"
+                id="from">
               </div>
               <div class="col-4">
                 <label for="to" class="convertorto-label">To</label>
-                <input type="text" class="form-control">
+                <input type="text" class="form-control flexdatalist" data-min-length='1'
+                list='currency'
+                name="currnecy"
+                id="to">
               </div>
             </div>
             <br>
             <h1><strong>=<span id="converted-amount"></span></strong></h1>
           </form>
+        </div>
+        <div class="card-footer">
+          
+    <button type="button" id="convert" class="btn btn-primary">Primary</button>
         </div>
       </div>
     </div>
@@ -133,11 +164,15 @@
 
 
 
-  </div>
 
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-  <script type="text/javascript" src="http://api.eventful.com/js/api"></script>
-  <script src="./assets/javascript/event.js"></script> <!--Eventful API link-->
+  </div>
+  <datalist id="currency">
+
+</datalist>
+
+  
+  <script src="assets/javascript/event.js"></script> <!--Eventful API link-->
+  <script src="assets/javascript/currency.js"></script>
 </body>
 
 </html>
