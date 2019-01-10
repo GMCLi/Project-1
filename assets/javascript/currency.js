@@ -43,13 +43,13 @@ $.ajax({
     rates= rate;
     switch(task){
         case "convert":
-        var converstion=rate*amount
+        var converstion=(rate*amount).toFixed(2)
         console.log(converstion)
         document.getElementById("converted-amount").textContent=converstion
         break;
         case "change_default":
-        amount.max=amount.max*rate
-        amount.min=amount.min*rate
+        amount.max=(amount.max*rate).toFixed(2)
+        amount.min=(amount.min*rate).toFixed(2)
         list.setAttribute("data-min",amount.min)
         list.setAttribute("data-min",amount.max)
         list.textContent="Price range: " +amount.min + " to " + amount.max + " " + to
