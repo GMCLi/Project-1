@@ -124,18 +124,18 @@ $("#eventSearch").on("click", function(){
                     for(var i=0; i<eventResults.length; i++){
 
                         if(Array.isArray(eventResults[i].priceRanges)){
-                          
-                        console.log("Event number is: " +i);
-                        console.log("Event name is :" + eventResults[i].name);//1
-                        console.log("Event image :" + eventResults[i].images[3].url);//2
-                        console.log("Event Currency  :" + eventResults[i].priceRanges[0].currency);//3
-                        console.log("Event Min Price :" + eventResults[i].priceRanges[0].min);//4
-                        console.log("Event Max Price :" + eventResults[i].priceRanges[0].max);//5
-                        console.log("Event Local Date :" + eventResults[i].dates.start.localDate);//6
-                        console.log("Event Local Time :" + eventResults[i].dates.start.localTime);//7
-                        console.log("Event Venue - City :" + eventResults[i]._embedded.venues[0].city.name);//8
-                        console.log("Event Venue - Country:" + eventResults[i]._embedded.venues[0].country.name);//9
-                        console.log("Buy Tickets " + eventResults[i].url);
+                        console.log(eventResults[i])  
+                        // console.log("Event number is: " +i);
+                        // console.log("Event name is :" + eventResults[i].name);//1
+                        // console.log("Event image :" + eventResults[i].images[3].url);//2
+                        // console.log("Event Currency  :" + eventResults[i].priceRanges[0].currency);//3
+                        // console.log("Event Min Price :" + eventResults[i].priceRanges[0].min);//4
+                        // console.log("Event Max Price :" + eventResults[i].priceRanges[0].max);//5
+                        // console.log("Event Local Date :" + eventResults[i].dates.start.localDate);//6
+                        // console.log("Event Local Time :" + eventResults[i].dates.start.localTime);//7
+                        // console.log("Event Venue - City :" + eventResults[i]._embedded.venues[0].city.name);//8
+                        // console.log("Event Venue - Country:" + eventResults[i]._embedded.venues[0].country.name);//9
+                        // console.log("Buy Tickets " + eventResults[i].url);
 
                         //assign event variables based on data
                         eventName = eventResults[i].name;

@@ -10,72 +10,64 @@ $(document).ready(function(){
       firebase.initializeApp(config);
 
    var database=firebase.database();
-    
-   database.ref("/currency/list/results").on("child_added",function(snapshot){
+    var auth=firebase.auth()
+    var user={  uid:"empty",
+                user_name:"empty",
+                user_email:"empty",
+                update:function(user_info){
+                    this.uid=user_info.uid
+                    this.user_name=user_info.display_name
+                    this.user_email=user_info.email
+                }
 
+    }
+   document.getElementById("sign-in").addEventListener("click",function(){
+        var name=document.getElementById("Username").textContent
+        var email=document.getElementById("email").textContent
+        var password=document.getElementById("password").textContent
+        // var email="ramoncarlosjulian@yahoo.com"
+        // var password="password"
+        // var name="Hello"
 
-    var option= document.createElement("option")
-    option.setAttribute("value",snapshot.val().id)
-    option.setAttribute("class", "list")
-    option.textContent=snapshot.val().currencyName
-    document.getElementById("currency").append(option)
-
-   })
-  
-
-
-// creates the dropdown list for the diffrent currencies the first one is for the base and the second on is for what we want
-
-   document.getElementById("convert").addEventListener("click",function(){
-      
-    
-    // 
-    var form=document.getElementById("from").value
-    var to=document.getElementById("to").value
-    var amount=parseFloat(document.getElementById("amount").value)
-    console.log(to)
-    console.log(form)
-    console.log(amount)
-   
-   
-    var q=form+"_"+to
-    console.log(q)
-    var queryUrl="https://free.currencyconverterapi.com/api/v6/convert?q="+q
-
-    console.log(queryUrl)
-   $.ajax({
-    url:queryUrl,
-    method:"GET",
-   }).then(function(response){
-
-    console.log(response)
-    var rate=response.results[q].val
-    var converstion=rate*amount
-
-    console.log(converstion)
-   })    
-
-
-    })
-
-
-
-
-
-    $('.flexdatalist').flexdatalist({
-        minLength: 1,
-        valueProperty:"value"
-   });
-
-
+        auth.createUserWithEmailAndPassword(email, password).then(function(snapshot){
+                snapshot.user.display_name=name
+                database.ref("/users/"+snapshot.user.uid).set({
+                    user_name:snapshot.user.display_name
+                })
+        })
 
    })
 
+//    document.getElementById("log-in").addEventListener("click",function(){
+//         // var email=document.getElementById("email").textContent
+//         // var password=document.getElementById("password").textContent
+//         auth.signInWithEmailAndPassword(email, password)
+
+//    })
+
+   firebase.auth().onAuthStateChanged(firebaseUser => {
+
+    if (firebaseUser) {
+        console.log(firebaseUser)
+       user.update(firebaseUser)
+       console.log(user)
+    } 
+})
+
+// logging out
+// document.getElementById("Log-out").addEventListener("click", function () {
+//     firebase.auth().signOut().then(function () {
+//         document.getElementsByClassName("container")[0].style.display = "none"
+//         document.getElementById("Log-out").style.display = "none"
+//         document.getElementById("Log-in").style.display = "block"
+//         document.getElementById("Sign-in").style.display = "block"
+//     })
+
+
+// })
 
 
 
 
 
-
-
-
+})
