@@ -6,16 +6,18 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>First Project!</title>
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css">
   <link href="assets/jquery-flexdatalist-2.2.4/jquery.flexdatalist.min.css" rel="stylesheet" type="text/css">
   <link rel="stylesheet" href="style.css">
   <!-- scritps -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k"
+  crossorigin="anonymous"></script>
   <script src="assets/jquery-flexdatalist-2.2.4/jquery.flexdatalist.min.js"></script>
   <script src="https://www.gstatic.com/firebasejs/5.7.2/firebase.js"></script>
-  <script src="assets/javascript/event.js"></script> <!--Eventful API link-->
+  <script src="assets/javascript/event.js"></script>
   <script src="assets/javascript/currency.js"></script>
+  <script src="assets/javascript/main.js"></script>
 </head>
 
 <body>
@@ -27,21 +29,30 @@
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
       <div class="navbar-nav">
         <a class="nav-item nav-link active" href="#">Home</a>
-        <a class="nav-item nav-link active" href="#">Events</a>
-        <a class="nav-item nav-link active" href="#">Currency</a>
+        <button type="button" id="create_user" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
+          Create Account
+        </button>
+        <button type="button" id="sign-in" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
+          Sign-in
+        </button>
+        <button type="button" id="Log-out" class="btn btn-primary">
+          Log-Out
+        </button>
 
       </div>
     </div>
     <form class="form-inline">
-      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-      <button class="btn btn-outline-success my-2 my-sm-0" type="submit" id="search-bar">Search</button>
+      <input class="form-control mr-sm-2 flexdatalist" id="new_default" data-min-length='1' list='currency' name="currnecy"
+        type="text" placeholder="Search" aria-label="Search">
+      <button type="button" class="btn btn-outline-success my-2 my-sm-0" id="change_default">Change</button>
     </form>
   </nav>
   <div class="jumbotron jumbotron-fluid">
-    <div class="container">
+  
       <h1 class="text-center">Let`s Look Up For Some Events!</h1>
     </div>
-  </div>
+    <div class="container">
+
   <div class="row">
     <div class="col-3">
       <div class="card text-center">
@@ -56,21 +67,17 @@
               <div class="form-row">
                 <div class="col-12">
                   <label for="amount" class="convertorform-label">Amount</label>
-                  <input type="text" class="form-control">
+                  <input type="text" class="form-control" id="amount">
                 </div>
                 <div class="col-12">
                   <label for="from" class="convertorform-label">From</label>
-                  <input type="text" class="form-control flexdatalist" data-min-length='1'
-                  list='currency'
-                  name="currnecy"
-                  id="from" >
+                  <input type="text" class="form-control flexdatalist" data-min-length='1' list='currency' name="currnecy"
+                    id="from">
                 </div>
                 <div class="col-12">
                   <label for="to" class="convertorto-label">To</label>
-                  <input type="text" class="form-control  flexdatalist" data-min-length='1'
-                  list='currency'
-                  name="currnecy"
-                  id="to">
+                  <input type="text" class="form-control  flexdatalist" data-min-length='1' list='currency' name="currnecy"
+                    id="to">
                 </div>
               </div>
               <br>
@@ -79,9 +86,9 @@
           </nav>
         </div>
         <div class="card-footer">
-          
+
           <button type="button" id="convert" class="btn btn-primary">Convert</button>
-              </div>
+        </div>
         <div class="card-header">
           <h2>Event Location</h2>
         </div>
@@ -106,7 +113,7 @@
 
               </div>
               <br>
-              <button type="button" id="eventSearch"class="btn btn-primary">Search</button><br>
+              <button type="button" id="eventSearch" class="btn btn-primary">Search</button><br>
               <br>
             </form>
           </nav>
@@ -121,7 +128,7 @@
 
       <div class="event-poster" id="eventDisplay">
 
-        <div class="card">
+        <!-- <div class="card">
           <div class="card-body">
             <h2 class="text-center">Images relevent to the selected event!</h2>
 
@@ -158,7 +165,7 @@
               </div>
             </div>
           </div>
-        </div>
+        </div> -->
 
       </div>
     </div>
@@ -166,11 +173,48 @@
 
 
   </div>
+
+</div>
+
+
   <datalist id="currency">
 
   </datalist>
+
+  <!-- Auth modal -->
+  <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="Title"></h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="input-group input-group-sm mb-3" id="name_box">
+        </div>
+        <div class="input-group input-group-sm mb-3">
+          <input type="text" id="email" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm"
+            placeholder="email">
+        </div>
+        <div class="input-group input-group-sm mb-3">
+          <input type="text" id="password" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm"
+            placeholder="password">
+        </div>
+
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" id="google_sign" data-toggle="modal" data-target="#exampleModalCenter">Sign
+          in With Google</button>
+        <button type="button" class="btn btn-primary" id="task_button" data-toggle="modal" data-target="#exampleModalCenter"></button>
+      </div>
+    </div>
+  </div>
+  </div>
+
   
 </body>
 
 </html>
-

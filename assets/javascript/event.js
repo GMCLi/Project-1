@@ -125,17 +125,7 @@ $("#eventSearch").on("click", function(){
 
                         if(Array.isArray(eventResults[i].priceRanges)){
                           
-                        console.log("Event number is: " +i);
-                        console.log("Event name is :" + eventResults[i].name);//1
-                        console.log("Event image :" + eventResults[i].images[3].url);//2
-                        console.log("Event Currency  :" + eventResults[i].priceRanges[0].currency);//3
-                        console.log("Event Min Price :" + eventResults[i].priceRanges[0].min);//4
-                        console.log("Event Max Price :" + eventResults[i].priceRanges[0].max);//5
-                        console.log("Event Local Date :" + eventResults[i].dates.start.localDate);//6
-                        console.log("Event Local Time :" + eventResults[i].dates.start.localTime);//7
-                        console.log("Event Venue - City :" + eventResults[i]._embedded.venues[0].city.name);//8
-                        console.log("Event Venue - Country:" + eventResults[i]._embedded.venues[0].country.name);//9
-                        console.log("Buy Tickets " + eventResults[i].url);
+                            console.log(eventResults[i])
 
                         //assign event variables based on data
                         eventName = eventResults[i].name;
@@ -161,10 +151,10 @@ $("#eventSearch").on("click", function(){
 
                         var newEventcardbody = $("<div>");
                         newEventcardbody.addClass("card-body");
-                        newEventcardbody.attr("data-min", EventMinPrice);
-                        newEventcardbody.attr("data-max", eventMaxPrice);
 
-                        
+                        var newEventcardfooter = $("<div>");
+                        newEventcardfooter.addClass("card-footer");
+                                           
                         var neweventTitle = $("<h5>");
                         neweventTitle.addClass("card-title");
                         neweventTitle.text(eventResults[i].name);
@@ -175,6 +165,9 @@ $("#eventSearch").on("click", function(){
 
                         var newEventPrice = $("<p>");
                         newEventPrice.addClass("card-text");
+                        newEventPrice.addClass("price-range")
+                        newEventPrice.attr("data-min", EventMinPrice);
+                        newEventPrice.attr("data-max", eventMaxPrice);
                         newEventPrice.text("Price range: " + EventMinPrice + " to " + eventMaxPrice + " " + eventCurrency);
 
                         var newEventDate
@@ -188,8 +181,16 @@ $("#eventSearch").on("click", function(){
                         buyTickets.attr("href", eventResults[i].url);
                         buyTickets.text("Buy Tickets");
 
-                        //append event details to card body    
                         
+                        var fav=$("<button>");
+                        fav.addClass("btn btn-primary favorite");
+                        fav.attr("event_id",eventResults[i].id)
+                        fav.text("fav")
+
+                        //append fav to card footer
+                        newEventcardfooter.append(fav)
+
+                           //append event details to card body 
                         newEventcardbody.append(newEventPrice);
                         newEventcardbody.append(newEventDate);
                         newEventcardbody.append(neweventDetails);
@@ -199,12 +200,13 @@ $("#eventSearch").on("click", function(){
                         newEvent.append(neweventTitle);
                         newEvent.append(newEventImage);
                         newEvent.append(newEventcardbody);
+                        newEvent.append(newEventcardfooter);
                         
 
                         //append card to html
 
                         $("#eventDisplay").append(newEvent);
-
+                        $("#eventDisplay").attr("data-currency", eventCurrency);
                         //clear float
 
                         var clearFloat = $("<div>");
