@@ -21,64 +21,27 @@ var stateCode = "";
 var eventCity="";
 var searchURL="";
 var keyWord = "";
+var eventId;
 
 
 //2. Search Event listeners
 
-$("#eventSearch").on("click",function(){
-    $("#eventDisplay").empty();
-    captureSearch();
-    getEvents();
-    $("#country").val("");
-    $("#state").val("");
-    $("#city").val("");
-
-}); //end of event search by country, state, city
-
-$("#search-bar").on("click",function(){
-    $("#eventDisplay").empty();
-    keywordSearch();
-    getEvents();
-    $("#key-word").val("");
-}); //end of key word search
+//pull the values of eventId
 
 //3. Functions
 
 // Generate dynamic search URL
 function captureSearch(){
-    event.preventDefault();
+    
    
-    console.log("you clicked event search!");
-     
-    //capture search values
- 
-     eventCountry = $("#country").val().trim().toLowerCase();
-     console.log("Event Country is: " + eventCountry);
- 
-     countryCode= document.getElementById("country").value;
-     console.log("Country Code is"+ countryCode);
- 
-     eventState = $("#state").val().trim().toLowerCase();
-     console.log(eventState);
- 
-     eventCity = $("#city").val().trim().toLowerCase();
-     console.log(eventCity);
  
      //Get search URL
-     
-     /* //Examples 
-     Get a list of all events in the United States https://app.ticketmaster.com/discovery/v2/events.json?countryCode=US&apikey=GRovhZWESxeRpkyVqNiWvG5iDGeyFBTp
-
-    Search for events sourced by Universe in the United States with keyword “devjam” https://app.ticketmaster.com/discovery/v2/events.json?keyword=devjam&source=universe&countryCode=US&apikey=GRovhZWESxeRpkyVqNiWvG5iDGeyFBTp
-
-    Search for music events in the Los Angeles area https://app.ticketmaster.com/discovery/v2/events.json?classificationName=music&dmaId=324&apikey=GRovhZWESxeRpkyVqNiWvG5iDGeyFBTp
-
-    Get a list of all events for Adele in Canada https://app.ticketmaster.com/discovery/v2/events.json?attractionId=K8vZ917Gku7&countryCode=CA&apikey=GRovhZWESxeRpkyVqNiWvG5iDGeyFBTp */
+ 
 
     //  searchURL = "https://app.ticketmaster.com/discovery/v2/events.json?size=1&apikey=GRovhZWESxeRpkyVqNiWvG5iDGeyFBTp&city=" + eventCity +"&countryCode=" + countryCode + "&stateCode=" + stateCode;
 
-     searchURL = "https://app.ticketmaster.com/discovery/v2/events.json?&apikey=GRovhZWESxeRpkyVqNiWvG5iDGeyFBTp&city=" + eventCity +"&countryCode=" + countryCode + "&stateCode=" + stateCode;
-
+     searchURL = "https://app.ticketmaster.com/discovery/v2/events.json?&apikey=GRovhZWESxeRpkyVqNiWvG5iDGeyFBTp&id=" + eventId;
+     
      console.log(searchURL);
     };
 
