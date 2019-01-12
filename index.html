@@ -51,7 +51,7 @@
       </div>
     </div>
     <form class="form-inline">
-      <input class="form-control mr-sm-2 flexdatalist"  id="key_search" type="search" placeholder="Search" aria-label="Search" list='currency' name="currnecy">
+      <input class="form-control mr-sm-2"  id="key_search" type="search" placeholder="Search" aria-label="Search" >
       <button type="button" class="btn btn-outline-success my-2 my-sm-0" id="search_event">Apply</button>    </form>
   </nav>
   <div class="jumbotron jumbotron-fluid">
@@ -73,11 +73,11 @@
             <form>
                 <div class="col-12">
                     <label for="defaul-input"   class="convertorform-label">Currency Display</label>
-                    <input type="text" id="new_default" class="form-control"><br>
+                    <input type="text" id="new_default" class="form-control flexdatalist" list='currency' name="currnecy" placeholder="Change Currency"><br>
                     <button type="button" class="btn btn-primary" id="change_default">Click!</button>
                     <hr>
                   </div>
-              <div class="form-row">
+              <div class="form-row">  
                 <div class="col-12">
                   <label for="amount" class="convertorform-label">Amount</label>
                   <input type="text" id="amount"class="form-control">
