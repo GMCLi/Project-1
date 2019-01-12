@@ -1,8 +1,46 @@
 body {
     background-color:royalblue;
+
+}
+#change_default{
+    background-color: grey;
+    color: white;
+}
+
     
 }
+<<<<<<< HEAD
 #search-bar {
     background-color: grey;
     color: white;
 }
+=======
+
+#eventDisplay {
+    box-sizing: border-box;
+}
+
+.buyBtn {
+    
+        position: absolute;
+        bottom: 10px;
+        right: 10px;
+
+}
+ #log-in-drop{
+     display: none;
+ }
+ .card-head{
+     display: flex;
+     flex-direction: row;
+ }
+
+.favorited{
+
+    border-color: gold;
+}
+.fav_button_clicked{
+    background-color: gold !important;
+}
+
+>>>>>>> df809b65315e12a1a067ee7a59b8a7b98861cdef
