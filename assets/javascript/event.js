@@ -348,11 +348,6 @@ function getEvents(){
 
 }); //End of Document ready
 
-
-
-
-
-
 /*
  /*   //firebase config
     var config = {
