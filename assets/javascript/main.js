@@ -14,6 +14,7 @@ $(document).ready(function(){
         var user={  uid:"",
                     user_name:"",
                     user_email:"",
+                    user_fav_list:[],
                     update:function(user_info){
                         this.uid=user_info.uid
                         this.user_email=user_info.email
@@ -29,7 +30,14 @@ $(document).ready(function(){
                         })
             
                     },
-                    user_fav_list:[]
+                    user_logout:function(){
+                        this.uid=""
+                        this.user_email=""
+                        this.user_name=""
+                        this.user_fav_list=[]
+
+                    }
+                  
         }
     
     
@@ -113,6 +121,11 @@ $(document).ready(function(){
     // logging out
     document.getElementById("Log-out").addEventListener("click", function () {
         firebase.auth().signOut().then(function () {
+
+            user.user_logout();
+            document.getElementsByClassName("favorited").forEach(element => {
+                element.classList.toggle("favorited")
+            });
             sign_in.style.display="block"
             create.style.display="block"
             log_out.style.display="none"
