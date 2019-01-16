@@ -172,6 +172,16 @@ function getEvents(){
                 newEvent.css("font-size", "20px");
                 neweventTitle.text(eventResults[i].name);
 
+                var newfav = $("<h3>");
+                newfav.css("color", "orange");
+                newfav.css("font-size", "20px");
+                newfav.addClass("newfav favorite");
+                newfav.attr("event_id",eventResults[i].id)
+                newfav.append('<i class="far fa-heart"></i>');
+                //change to this when selected <i class="fas fa-heart"></i>
+
+                
+
                 var fav=$("<button>");
                 fav.addClass("btn btn-primary favorite");
                 fav.attr("event_id",eventResults[i].id)
@@ -207,6 +217,7 @@ function getEvents(){
                 //append to head
                 newEventcardhead.append(neweventTitle)
                 newEventcardhead.append(fav)
+                newEventcardhead.append(newfav)
                 //append event details to card body    
                         
                 newEventcardbody.append(neweventDetails);
