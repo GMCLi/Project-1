@@ -12,25 +12,33 @@ $(document).ready(function(){
        var database=firebase.database();
         var auth=firebase.auth()
         var user={  uid:"",
-                    user_name:"",
-                    user_email:"",
-                    update:function(user_info){
-                        this.uid=user_info.uid
-                        this.user_email=user_info.email
+        user_name:"",
+        user_email:"",
+        user_fav_list:[],
+        update:function(user_info){
+            this.uid=user_info.uid
+            this.user_email=user_info.email
 
-                        //grab user name
-                        database.ref("/users/"+user.uid).on("value",function(snapshot){
-                            user.user_name=snapshot.val().user_name
-                            document.getElementById("dropdownMenuButton").textContent=snapshot.val().user_name
-                        })
-                        //grab user fav list
-                        database.ref("/users/"+user.uid+"/favorite").on("child_added",function(snaphot){
-                            user.user_fav_list.push(snaphot.val().event_id)
-                        })
-            
-                    },
-                    user_fav_list:[]
+            //grab user name
+            database.ref("/users/"+user.uid).on("value",function(snapshot){
+                user.user_name=snapshot.val().user_name
+                document.getElementById("dropdownMenuButton").textContent=snapshot.val().user_name
+            })
+            //grab user fav list
+            database.ref("/users/"+user.uid+"/favorite").on("child_added",function(snaphot){
+                user.user_fav_list.push(snaphot.val().event_id)
+            })
+
+        },
+        user_logout:function(){
+            this.uid=""
+            this.user_email=""
+            this.user_name=""
+            this.user_fav_list=[]
+
         }
+      
+}
     
     
     // clicking a button to sign-in or create user
@@ -113,12 +121,17 @@ $(document).ready(function(){
     // logging out
     document.getElementById("Log-out").addEventListener("click", function () {
         firebase.auth().signOut().then(function () {
+
+            user.user_logout();
+            document.getElementsByClassName("favorited").forEach(element => {
+                element.classList.toggle("favorited")
+            });
             sign_in.style.display="block"
             create.style.display="block"
             log_out.style.display="none"
             console.log("bye")
         })
-    
+   
     
     })
     
