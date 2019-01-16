@@ -303,4 +303,6 @@ function getEvents(){
 
        }
    })
+
+   window.location.href="index.html";
 }); //End of Document ready
